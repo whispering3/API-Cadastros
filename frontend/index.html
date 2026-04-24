@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão GCC - Dashboard</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="dark-mode">
+    <div id="app">
+        <header>
+            <div class="container">
+                <h1>🚀 Gestão GCC</h1>
+                <nav id="main-nav" class="hidden">
+                    <button onclick="showSection('users')">Usuários</button>
+                    <button onclick="showSection('orders')">Pedidos</button>
+                    <button onclick="logout()" class="btn-logout">Sair</button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- Auth -->
+            <section id="auth-section" class="card fade-in">
+                <div class="tabs">
+                    <button id="tab-login" class="active" onclick="toggleAuthTab('login')">Login</button>
+                    <button id="tab-register" onclick="toggleAuthTab('register')">Cadastro</button>
+                </div>
+
+                <div id="login-form">
+                    <h2>Bem-vindo de volta</h2>
+                    <div class="input-group">
+                        <label>Email ou Login</label>
+                        <input type="text" id="login-username" placeholder="Seu email ou login">
+                    </div>
+                    <div class="input-group">
+                        <label>Senha</label>
+                        <input type="password" id="login-password" placeholder="••••••••">
+                    </div>
+                    <button class="btn-primary" onclick="handleLogin()">Entrar</button>
+                </div>
+
+                <div id="register-form" class="hidden">
+                    <h2>Criar nova conta</h2>
+                    <div class="grid">
+                        <div class="input-group">
+                            <label>Nome Completo</label>
+                            <input type="text" id="reg-nome">
+                        </div>
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="email" id="reg-email">
+                        </div>
+                        <div class="input-group">
+                            <label>Login</label>
+                            <input type="text" id="reg-login">
+                        </div>
+                        <div class="input-group">
+                            <label>CPF</label>
+                            <input type="text" id="reg-cpf" placeholder="000.000.000-00">
+                        </div>
+                        <div class="input-group">
+                            <label>RG</label>
+                            <input type="text" id="reg-rg">
+                        </div>
+                        <div class="input-group">
+                            <label>Idade</label>
+                            <input type="number" id="reg-idade">
+                        </div>
+                        <div class="input-group full-width">
+                            <label>Senha</label>
+                            <input type="password" id="reg-password">
+                        </div>
+                    </div>
+                    <button class="btn-primary" onclick="handleRegister()">Cadastrar</button>
+                </div>
+            </section>
+
+            <!-- Usuários -->
+            <section id="users-section" class="hidden fade-in">
+                <div class="section-header">
+                    <h2>Gerenciamento de Usuários</h2>
+                </div>
+                <div class="card table-container">
+                    <table id="users-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>CPF</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-list">
+                            <!-- JS populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Pedidos -->
+            <section id="orders-section" class="hidden fade-in">
+                <div class="section-header">
+                    <h2>Gestão de Pedidos</h2>
+                    <div class="header-actions">
+                        <select id="filter-user-id" class="input-select" style="width: auto;"
+                            onchange="loadOrdersByFilter()">
+                            <option value="all">Todos os Usuários</option>
+                            <option value="me">Meus Pedidos</option>
+                            <!-- JS populated -->
+                        </select>
+                        <button class="btn-primary" onclick="showNewOrderModal()">Novo Pedido</button>
+                    </div>
+                </div>
+                <div id="orders-list" class="order-grid">
+                    <!-- JS populated -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>Desenvolvido por <strong>Danilo Souza</strong>: <a
+                        href="https://github.com/whispering3/API-Cadastros" target="_blank">Github</a></p>
+            </div>
+        </footer>
+
+        <!-- Modal -->
+        <div id="modal-overlay" class="hidden">
+            <div class="modal">
+                <div id="modal-content"></div>
+                <div class="modal-footer">
+                    <button onclick="closeModal()" class="btn-secondary">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="toast-container"></div>
+    </div>
+    <script src="static/app.js?v=1.1"></script>
+</body>
+
+</html>
