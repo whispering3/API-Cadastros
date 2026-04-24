@@ -19,3 +19,7 @@ class Order(Base):
 
     # Relacionamento: O pedido pertence a um usuário
     owner = relationship("User", back_populates="orders")
+
+    @property
+    def user_nome(self):
+        return self.owner.nome if self.owner else "Desconhecido"

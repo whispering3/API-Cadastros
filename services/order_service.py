@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from typing import List
 from models.order import Order
 from schemas.order import OrderCreate
@@ -18,9 +18,9 @@ def create_order(db: Session, order_in: OrderCreate, user_id: int) -> Order:
 
 def list_orders(db: Session, user_id: int = None) -> List[Order]:
     """
-    Lista pedidos. Se user_id for passado, filtra por usuário.
+    Lista pedidos com o nome do usuário.
     """
-    query = db.query(Order)
+    query = db.query(Order).options(joinedload(Order.owner))
     if user_id:
         query = query.filter(Order.user_id == user_id)
     return query.all()

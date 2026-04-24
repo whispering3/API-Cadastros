@@ -248,7 +248,7 @@ function renderOrders(orders) {
                     <button class="btn-delete" onclick="deleteOrderApi(${order.id})">Excluir</button>
                 </div>
             </div>
-            <p><strong>Usuário (ID):</strong> ${order.user_id}</p>
+            <p><strong>Usuário:</strong> ${order.user_nome} (ID: ${order.user_id})</p>
             <p><strong>Descrição:</strong> ${order.descricao}</p>
             <div class="date">${new Date(order.created_at).toLocaleString()}</div>
         `;
